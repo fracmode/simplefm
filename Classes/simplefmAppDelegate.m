@@ -1,5 +1,5 @@
 /*
-     File: HelloWorldAppDelegate.m
+     File: simplefmAppDelegate.m
  Abstract: 
   Version: 1.8
  
@@ -45,11 +45,11 @@
  
  */
 
-#import "HelloWorldAppDelegate.h"
+#import "simplefmAppDelegate.h"
 #import "MyViewController.h"
 
 
-@implementation HelloWorldAppDelegate
+@implementation simplefmAppDelegate
 
 @synthesize window;
 @synthesize myViewController;
@@ -58,16 +58,18 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
 	
 	// Set up the view controller
-	MyViewController *aViewController = [[MyViewController alloc] initWithNibName:@"HelloWorld" bundle:[NSBundle mainBundle]];
+	MyViewController *aViewController = [[MyViewController alloc] initWithNibName:@"simplefm" bundle:[NSBundle mainBundle]];
 	self.myViewController = aViewController;
 	[aViewController release];
     
+	self.window.rootViewController = [UIViewController new];
+
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
 	
 	// Add the view controller's view as a subview of the window
 	UIView *controllersView = [myViewController view];
-	[window addSubview:controllersView];
-	[window makeKeyAndVisible];
+	[self.window addSubview:controllersView];
+	[self.window makeKeyAndVisible];
 }
 
 
