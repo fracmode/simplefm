@@ -1,5 +1,5 @@
 /*
-     File: HelloWorld_Prefix.pch
+     File: simplefmAppDelegate.h
  Abstract: 
   Version: 1.8
  
@@ -45,11 +45,17 @@
  
  */
 
-//
-// Prefix header for all source files of the 'HelloWorld' target in the 'HelloWorld' project
-//
+#import <UIKit/UIKit.h>
 
-#ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-    #import <UIKit/UIKit.h>
-#endif
+@class MyViewController;
+
+@interface simplefmAppDelegate : NSObject <UIApplicationDelegate> {
+	
+	IBOutlet UIWindow *window;
+	MyViewController *myViewController;
+}
+
+@property (nonatomic, retain) UIWindow *window;
+@property (nonatomic, retain) MyViewController *myViewController;
+
+@end

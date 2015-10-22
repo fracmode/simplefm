@@ -1,5 +1,5 @@
 /*
-     File: HelloWorldAppDelegate.h
+     File: simplefm_Prefix.pch
  Abstract: 
   Version: 1.8
  
@@ -45,17 +45,11 @@
  
  */
 
-#import <UIKit/UIKit.h>
+//
+// Prefix header for all source files of the 'simplefm' target in the 'simplefm' project
+//
 
-@class MyViewController;
-
-@interface HelloWorldAppDelegate : NSObject <UIApplicationDelegate> {
-	
-	IBOutlet UIWindow *window;
-	MyViewController *myViewController;
-}
-
-@property (nonatomic, retain) UIWindow *window;
-@property (nonatomic, retain) MyViewController *myViewController;
-
-@end
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+#endif
