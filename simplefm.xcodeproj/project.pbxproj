@@ -23,7 +23,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		289ED5050DB92497003600B4 /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289ED5040DB92497003600B4 /* MyViewController.m */; };
-		BDAF43C21BD909E4004768D3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDAF43C11BD909E4004768D3 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
+		BDAF43C21BD909E4004768D3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDAF43C11BD909E4004768D3 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -161,7 +161,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0710;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "simplefm" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -278,6 +278,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
