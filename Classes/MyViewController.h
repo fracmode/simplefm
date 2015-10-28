@@ -46,6 +46,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface MyViewController : UIViewController <UITextFieldDelegate> {
 	
