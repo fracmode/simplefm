@@ -18,6 +18,8 @@
 		1804551911D2CB3900C48934 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1804551211D2CB3900C48934 /* Icon.png */; };
 		1804551A11D2CB3900C48934 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1804551311D2CB3900C48934 /* Icon@2x.png */; };
 		1804551B11D2CB3900C48934 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 1804551411D2CB3900C48934 /* iTunesArtwork */; };
+		1AB11A871BE1038C00AC1E4E /* tap.aif in Resources */ = {isa = PBXBuildFile; fileRef = 1AB11A861BE1038C00AC1E4E /* tap.aif */; };
+		1AB11A891BE1046600AC1E4E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB11A881BE1046600AC1E4E /* AudioToolbox.framework */; };
 		1D3623260D0F684500981E51 /* simplefmAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* simplefmAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -38,6 +40,8 @@
 		1804551211D2CB3900C48934 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = images/Icon.png; sourceTree = "<group>"; };
 		1804551311D2CB3900C48934 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "images/Icon@2x.png"; sourceTree = "<group>"; };
 		1804551411D2CB3900C48934 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = images/iTunesArtwork; sourceTree = "<group>"; };
+		1AB11A861BE1038C00AC1E4E /* tap.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = tap.aif; path = sounds/tap.aif; sourceTree = "<group>"; };
+		1AB11A881BE1046600AC1E4E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* simplefmAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = simplefmAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* simplefmAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = simplefmAppDelegate.m; sourceTree = "<group>"; };
@@ -57,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AB11A891BE1046600AC1E4E /* AudioToolbox.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 			);
@@ -109,6 +114,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1AB11A861BE1038C00AC1E4E /* tap.aif */,
 				BDAF43C11BD909E4004768D3 /* Images.xcassets */,
 				1804550E11D2CB3900C48934 /* Icon-72.png */,
 				1804550F11D2CB3900C48934 /* Icon-Small-50.png */,
@@ -129,6 +135,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1AB11A881BE1046600AC1E4E /* AudioToolbox.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 			);
@@ -200,6 +207,7 @@
 				BDAF43C21BD909E4004768D3 /* Images.xcassets in Resources */,
 				1804551A11D2CB3900C48934 /* Icon@2x.png in Resources */,
 				1804551B11D2CB3900C48934 /* iTunesArtwork in Resources */,
+				1AB11A871BE1038C00AC1E4E /* tap.aif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

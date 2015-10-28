@@ -92,6 +92,25 @@
     [super touchesBegan:touches withEvent:event];
 }
 
+- (IBAction)play:(id)sender{
+    SystemSoundID systemSoundID;
+    //[1] tap.aifのパスを取得
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"tap" ofType:@"aif"];
+    //[2] パスからNSURLを取得
+    NSURL *fileURL = [NSURL fileURLWithPath:path];
+    
+    OSStatus err;
+    //[3] SystemSoundIDを作成する
+    err = AudioServicesCreateSystemSoundID((CFURLRef)fileURL, &systemSoundID);
+    
+    //[4]エラーがあった場合はreturnで中止
+    if(err){
+        NSLog(@"AudioServicesCreateSystemSoundID err = %d",err);
+        return;
+    }
+    //[5] 再生する
+    AudioServicesPlaySystemSound(systemSoundID);
+}
 
 - (void)dealloc {
 	// To adhere to memory management rules, release the instance variables.
