@@ -54,6 +54,14 @@
 @synthesize label;
 @synthesize string;
 
+void systemSoundCompletionProcFunction( SystemSoundID ssID, void* clientData ) {
+    NSLog(@"play did end");
+    //ssIDを解放する
+    AudioServicesDisposeSystemSoundID(ssID);
+}
+
+
+
 - (void)viewDidLoad {
     // When the user starts typing, show the clear button in the text field.
     textField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -104,10 +112,15 @@
     err = AudioServicesCreateSystemSoundID((CFURLRef)fileURL, &systemSoundID);
     
     //[4]エラーがあった場合はreturnで中止
-    if(err){
+    if ( err ) {
         NSLog(@"AudioServicesCreateSystemSoundID err = %d",err);
         return;
     }
+
+    //コールバック関数の登録
+    AudioServicesAddSystemSoundCompletion( systemSoundID, NULL, NULL,
+        systemSoundCompletionProcFunction, NULL);
+    
     //[5] 再生する
     AudioServicesPlaySystemSound(systemSoundID);
 }
