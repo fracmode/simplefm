@@ -18,6 +18,7 @@
 		1804551911D2CB3900C48934 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1804551211D2CB3900C48934 /* Icon.png */; };
 		1804551A11D2CB3900C48934 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1804551311D2CB3900C48934 /* Icon@2x.png */; };
 		1804551B11D2CB3900C48934 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 1804551411D2CB3900C48934 /* iTunesArtwork */; };
+		1A6632981BE4FF6D00AE2A91 /* AudioQueueSynthLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6632971BE4FF6D00AE2A91 /* AudioQueueSynthLibrary.m */; };
 		1AB11A871BE1038C00AC1E4E /* tap.aif in Resources */ = {isa = PBXBuildFile; fileRef = 1AB11A861BE1038C00AC1E4E /* tap.aif */; };
 		1AB11A891BE1046600AC1E4E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB11A881BE1046600AC1E4E /* AudioToolbox.framework */; };
 		1D3623260D0F684500981E51 /* simplefmAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* simplefmAppDelegate.m */; };
@@ -40,6 +41,8 @@
 		1804551211D2CB3900C48934 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = images/Icon.png; sourceTree = "<group>"; };
 		1804551311D2CB3900C48934 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "images/Icon@2x.png"; sourceTree = "<group>"; };
 		1804551411D2CB3900C48934 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = images/iTunesArtwork; sourceTree = "<group>"; };
+		1A6632961BE4FF6D00AE2A91 /* AudioQueueSynthLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioQueueSynthLibrary.h; sourceTree = "<group>"; };
+		1A6632971BE4FF6D00AE2A91 /* AudioQueueSynthLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioQueueSynthLibrary.m; sourceTree = "<group>"; };
 		1AB11A861BE1038C00AC1E4E /* tap.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = tap.aif; path = sounds/tap.aif; sourceTree = "<group>"; };
 		1AB11A881BE1046600AC1E4E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -73,6 +76,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1A6632951BE4FF6D00AE2A91 /* Library */,
 				1D3623240D0F684500981E51 /* simplefmAppDelegate.h */,
 				1D3623250D0F684500981E51 /* simplefmAppDelegate.m */,
 				289ED5030DB92497003600B4 /* MyViewController.h */,
@@ -87,6 +91,15 @@
 				1D6058910D05DD3D006BFB54 /* simplefm.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1A6632951BE4FF6D00AE2A91 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				1A6632961BE4FF6D00AE2A91 /* AudioQueueSynthLibrary.h */,
+				1A6632971BE4FF6D00AE2A91 /* AudioQueueSynthLibrary.m */,
+			);
+			path = Library;
 			sourceTree = "<group>";
 		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
@@ -219,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1A6632981BE4FF6D00AE2A91 /* AudioQueueSynthLibrary.m in Sources */,
 				1D3623260D0F684500981E51 /* simplefmAppDelegate.m in Sources */,
 				289ED5050DB92497003600B4 /* MyViewController.m in Sources */,
 			);

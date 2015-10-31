@@ -68,6 +68,8 @@ void systemSoundCompletionProcFunction( SystemSoundID ssID, void* clientData ) {
     // When the view first loads, display the placeholder text that's in the
     // text field in the label.
     label.text = textField.placeholder;
+
+    synth = [ [AudioQueueSynthLibrary alloc] init ];
 }
 
 
@@ -100,7 +102,7 @@ void systemSoundCompletionProcFunction( SystemSoundID ssID, void* clientData ) {
     [super touchesBegan:touches withEvent:event];
 }
 
-- (IBAction)play:(id)sender{
+- (IBAction)playAIFF:(id)sender{
     SystemSoundID systemSoundID;
     //[1] tap.aifのパスを取得
     NSString *path = [[NSBundle mainBundle] pathForResource:@"tap" ofType:@"aif"];
@@ -123,6 +125,14 @@ void systemSoundCompletionProcFunction( SystemSoundID ssID, void* clientData ) {
     
     //[5] 再生する
     AudioServicesPlaySystemSound(systemSoundID);
+}
+
+-(IBAction)play:(id)sender{
+    [synth play];
+}
+
+-(IBAction)stop:(id)sender{
+    [synth stop:YES];
 }
 
 - (void)dealloc {

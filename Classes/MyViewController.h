@@ -47,12 +47,15 @@
 
 #import <UIKit/UIKit.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import "Library/AudioQueueSynthLibrary.h"
 
 @interface MyViewController : UIViewController <UITextFieldDelegate> {
 	
 	IBOutlet UITextField *textField;
 	IBOutlet UILabel *label;
 	NSString *string;
+
+    AudioQueueSynthLibrary *synth;
 }
 
 @property (nonatomic, retain) UITextField *textField;
@@ -60,6 +63,10 @@
 @property (nonatomic, copy) NSString *string;
 
 - (void)updateString;
+
+-(IBAction)playAIFF:(id)sender;
+-(IBAction)play:(id)sender;
+-(IBAction)stop:(id)sender;
 
 @end
 
