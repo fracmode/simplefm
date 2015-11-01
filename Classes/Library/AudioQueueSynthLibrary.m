@@ -26,7 +26,7 @@ static void outputCallback(void *                  inUserData,
     SInt16 *output = inBuffer->mAudioData;
     double phase = player.phase;
     for(int i = 0; i < numPackets; i++){
-        float wave = sin(phase);
+        float wave = sin( phase ) + sin( phase * 4 );
         SInt16 sample = wave * 32767; //16bit整数
         *output++ = sample;
         phase = phase + freq;
