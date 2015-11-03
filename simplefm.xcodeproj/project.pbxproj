@@ -102,6 +102,15 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
+		1ACC69661BE82A4F0064351F /* xibs */ = {
+			isa = PBXGroup;
+			children = (
+				1804550011D2CAB700C48934 /* simplefm.xib */,
+				1804550211D2CAB700C48934 /* MainWindow.xib */,
+			);
+			name = xibs;
+			sourceTree = "<group>";
+		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,8 +147,7 @@
 				1804551411D2CB3900C48934 /* iTunesArtwork */,
 				1804550611D2CABF00C48934 /* Background.png */,
 				1804550711D2CABF00C48934 /* Default.png */,
-				1804550011D2CAB700C48934 /* simplefm.xib */,
-				1804550211D2CAB700C48934 /* MainWindow.xib */,
+				1ACC69661BE82A4F0064351F /* xibs */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 			);
 			name = Resources;
