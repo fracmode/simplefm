@@ -9,7 +9,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AudioToolbox/AudioToolbox.h>
-#import "Library/AudioQueueSynthLibrary.h"
+#import "Library/RemoteOutputLibrary.h"
 
 @interface MyViewController : UIViewController <UITextFieldDelegate> {
 	
@@ -21,7 +21,7 @@
 
 	NSString *string;
 
-    AudioQueueSynthLibrary *synth;
+    RemoteOutputLibrary *remoteOutput;
 }
 
 @property (nonatomic, retain) UITextField *textField;
