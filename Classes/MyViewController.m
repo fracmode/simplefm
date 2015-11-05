@@ -33,7 +33,7 @@ void systemSoundCompletionProcFunction( SystemSoundID ssID, void* clientData ) {
     // text field in the label.
     label.text = textField.placeholder;
 
-    synth = [ [AudioQueueSynthLibrary alloc] init ];
+    remoteOutput = [ [RemoteOutputLibrary alloc] init ];
 }
 
 
@@ -92,11 +92,11 @@ void systemSoundCompletionProcFunction( SystemSoundID ssID, void* clientData ) {
 }
 
 -(IBAction)play:(id)sender{
-    [synth play];
+    [remoteOutput play];
 }
 
 -(IBAction)stop:(id)sender{
-    [synth stop:YES];
+    [remoteOutput stop];
 }
 
 -(IBAction)stepperBPMAction:(UIStepper*)sender {
@@ -110,6 +110,8 @@ void systemSoundCompletionProcFunction( SystemSoundID ssID, void* clientData ) {
     // is loaded.
 	[textField release];
 	[label release];
+
+    [remoteOutput release];
 	[super dealloc];
 }
 

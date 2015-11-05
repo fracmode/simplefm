@@ -13,13 +13,18 @@
     UInt32 numPacketsToRead;
     BOOL isPrepared;
     double phase;
+    double frequency;
+    double freqz;
 }
-
 
 @property UInt32 numPacketsToRead;
 @property double phase;
 
--(void)play;
+@property double frequency;
+@property double freqz;
+
 -(void)prepareAudioQueue;
+
+-(void)play;
 -(void)stop:(BOOL)shouldStopImmediate;
 @end
