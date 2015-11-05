@@ -12,6 +12,8 @@
 @synthesize phase;
 @synthesize sampleRate;
 
+typedef SInt32 AudioUnitSampleTypeSInt32;
+
 static OSStatus renderCallback(void*                       inRefCon,
                                AudioUnitRenderActionFlags* ioActionFlags,
                                const AudioTimeStamp*       inTimeStamp,
@@ -25,14 +27,14 @@ static OSStatus renderCallback(void*                       inRefCon,
     //phaseはサウンドの再生中に継続して使うため、RemoteOutputLibraryのプロパティとする
     double phase = def.phase;
     //[2]値を書き込むポインタ
-    AudioUnitSampleType *outL = ioData->mBuffers[0].mData;
-    AudioUnitSampleType *outR = ioData->mBuffers[1].mData;
+    AudioUnitSampleTypeSInt32 *outL = ioData->mBuffers[0].mData;
+    AudioUnitSampleTypeSInt32 *outR = ioData->mBuffers[1].mData;
     
     for (int i = 0; i< inNumberFrames; i++){
         //[3]サイン波を計算
         float wave = sin(phase);
         //[4] 8.24固定小数点に変換
-        AudioUnitSampleType sample = wave * (1 << kAudioUnitSampleFractionBits);
+        AudioUnitSampleTypeSInt32 sample = wave * (1 << kAudioUnitSampleFractionBits);
         *outL++ = sample;
         *outR++ = sample;
         phase = phase + freq;
@@ -87,10 +89,10 @@ static OSStatus renderCallback(void*                       inRefCon,
     audioFormat.mFormatID           = kAudioFormatLinearPCM;
     audioFormat.mFormatFlags        = kAudioFormatFlagsAudioUnitCanonical;
     audioFormat.mChannelsPerFrame   = 2;
-    audioFormat.mBytesPerPacket     = sizeof(AudioUnitSampleType);
-    audioFormat.mBytesPerFrame      = sizeof(AudioUnitSampleType);
+    audioFormat.mBytesPerPacket     = sizeof(AudioUnitSampleTypeSInt32);
+    audioFormat.mBytesPerFrame      = sizeof(AudioUnitSampleTypeSInt32);
     audioFormat.mFramesPerPacket    = 1;
-    audioFormat.mBitsPerChannel     = 8 * sizeof(AudioUnitSampleType);
+    audioFormat.mBitsPerChannel     = 8 * sizeof(AudioUnitSampleTypeSInt32);
     audioFormat.mReserved           = 0;
     
     AudioUnitSetProperty(audioUnit,
