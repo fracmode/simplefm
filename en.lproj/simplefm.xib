@@ -57,9 +57,7 @@
                     <animations/>
                     <state key="normal" title="Sine Tone"/>
                     <connections>
-                        <action selector="play:" destination="-1" eventType="touchDown" id="tST-EU-eyH"/>
-                        <action selector="stop:" destination="-1" eventType="touchUpInside" id="Lez-gA-MrK"/>
-                        <action selector="stop:" destination="-1" eventType="touchUpOutside" id="tzq-NZ-QsM"/>
+                        <action selector="play:" destination="-1" eventType="touchDown" id="Gaw-42-nKZ"/>
                     </connections>
                 </button>
                 <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minimumValue="30" maximumValue="300" stepValue="0.10000000000000001" id="iNd-ON-ScP" userLabel="BPMStepper">
@@ -80,6 +78,23 @@
                         <outlet property="delegate" destination="-1" id="N5N-W0-EYP"/>
                     </connections>
                 </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="J95-Wg-Ykj">
+                    <rect key="frame" x="131" y="218" width="58" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <animations/>
+                    <state key="normal" title="Stop"/>
+                    <connections>
+                        <action selector="stop:" destination="-1" eventType="touchDown" id="Qbj-f7-FAA"/>
+                    </connections>
+                </button>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="69" minValue="30" maxValue="127" id="DaR-TS-9B1" userLabel="frequencySlider">
+                    <rect key="frame" x="18" y="279" width="284" height="31"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <animations/>
+                    <connections>
+                        <action selector="frequencyAction:" destination="-1" eventType="valueChanged" id="y1X-Ss-GaY"/>
+                    </connections>
+                </slider>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

@@ -38,5 +38,7 @@
 
 -(IBAction)stepperBPMAction:(id)sender;
 
+-(IBAction)frequencyAction:(UISlider*)sender;
+
 @end
 
