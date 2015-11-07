@@ -7,39 +7,38 @@
 
 #import "RemoteOutputLibrary.h"
 
-@implementation RemoteOutputLibrary
-
-@synthesize phase;
-@synthesize sampleRate;
-
 typedef SInt32 AudioUnitSampleTypeSInt32;
 
-static OSStatus renderCallback(void*                       inRefCon,
+@implementation RemoteOutputLibrary
+
+static OSStatus renderCallback(
+                               void*                       inRefCon,
                                AudioUnitRenderActionFlags* ioActionFlags,
                                const AudioTimeStamp*       inTimeStamp,
                                UInt32                      inBusNumber,
                                UInt32                      inNumberFrames,
                                AudioBufferList*            ioData){
-    //[1]RemoteOutputLibraryのインスタンスにキャストする
-    RemoteOutputLibrary* def = (RemoteOutputLibrary*)inRefCon;    
-    //サイン波の計算に使う数値の用意
-    float freq = 880 * 2.0 * M_PI / def.sampleRate;
-    //phaseはサウンドの再生中に継続して使うため、RemoteOutputLibraryのプロパティとする
-    double phase = def.phase;
-    //[2]値を書き込むポインタ
+    
+    SineWaveDef* def = (SineWaveDef*)inRefCon;
+    
+    double freqz = def->freqz;
+    double freq = def->frequency;
+    double phase = def->phase;
+    
     AudioUnitSampleTypeSInt32 *outL = ioData->mBuffers[0].mData;
     AudioUnitSampleTypeSInt32 *outR = ioData->mBuffers[1].mData;
     
-    for (int i = 0; i< inNumberFrames; i++){
-        //[3]サイン波を計算
+    for(int i = 0; i< inNumberFrames; i++){
         float wave = sin(phase);
-        //[4] 8.24固定小数点に変換
         AudioUnitSampleTypeSInt32 sample = wave * (1 << kAudioUnitSampleFractionBits);
         *outL++ = sample;
         *outR++ = sample;
-        phase = phase + freq;
+        phase = phase + freqz;
+        //滑らかに変化させる
+        freqz = 0.001 * freq + 0.999 * freqz;
     }
-    def.phase = phase;
+    def->freqz = freqz;
+    def->phase = phase;
     return noErr;
 }
 
@@ -53,7 +52,15 @@ static OSStatus renderCallback(void*                       inRefCon,
     return isPlaying;
 }
 
-- (void)prepareAudioUnit{    
+-(double)frequency{
+    return sineWaveDef.frequency / (2.0 * M_PI) * sineWaveDef.sampleRate;
+}
+
+-(void)setFrequency:(double)frequency{
+    sineWaveDef.frequency = frequency * 2.0 * M_PI / sineWaveDef.sampleRate;
+}
+
+- (void)prepareAudioUnit{
     //RemoteIO Audio UnitのAudioComponentDescriptionを作成
     AudioComponentDescription cd;
     cd.componentType = kAudioUnitType_Output;
@@ -73,19 +80,23 @@ static OSStatus renderCallback(void*                       inRefCon,
     
     AURenderCallbackStruct callbackStruct;
     callbackStruct.inputProc = renderCallback;//コールバック関数の設定
-    callbackStruct.inputProcRefCon = self;//コールバック関数内で参照するデータのポインタ
+    callbackStruct.inputProcRefCon = &sineWaveDef;//コールバック関数内で参照するデータのポインタ
     
-    AudioUnitSetProperty(audioUnit, 
-                         kAudioUnitProperty_SetRenderCallback, 
-                         //サイン波の値はAudioUnitに入ってくるものなのでScopeはInput
-                         kAudioUnitScope_Input,
+    AudioUnitSetProperty(audioUnit,
+                         kAudioUnitProperty_SetRenderCallback,
+                         kAudioUnitScope_Input, //サイン波の値はAudioUnitに入ってくるものなのでScopeはInput
                          0,   // 0 == スピーカー
                          &callbackStruct,
                          sizeof(AURenderCallbackStruct));
-    sampleRate = 44100.0;
+    
+    sineWaveDef.sampleRate = 44100.0;
+    sineWaveDef.phase = 0.0;
+    
+    [self setFrequency:440];
+    sineWaveDef.freqz = sineWaveDef.freqz;
     
     AudioStreamBasicDescription audioFormat;
-    audioFormat.mSampleRate         = sampleRate;
+    audioFormat.mSampleRate         = sineWaveDef.sampleRate;
     audioFormat.mFormatID           = kAudioFormatLinearPCM;
     audioFormat.mFormatFlags        = kAudioFormatFlagsAudioUnitCanonical;
     audioFormat.mChannelsPerFrame   = 2;
@@ -101,6 +112,37 @@ static OSStatus renderCallback(void*                       inRefCon,
                          0,
                          &audioFormat,
                          sizeof(audioFormat));
+    
+    //フレームバッファサイズの変更
+    {
+        AudioSessionInitialize(NULL, NULL, NULL,NULL);
+        Float32 currentDuration;
+        UInt32 size = sizeof(Float32);
+        AudioSessionGetProperty(kAudioSessionProperty_CurrentHardwareIOBufferDuration,
+                                &size,
+                                &currentDuration);
+        printf("currentDuration = %f\n",currentDuration);
+        //フレームバッファサイズ
+        NSLog(@"frame size = %f", sineWaveDef.sampleRate * currentDuration);
+        
+        //フレーム数から秒を計算 256 = 希望するフレーム数
+        Float32 duration = 256 / sineWaveDef.sampleRate;
+        printf("duration = %f\n",duration);
+        //IOBufferDurationを変更する
+        size = sizeof(Float32);
+        AudioSessionSetProperty(kAudioSessionProperty_PreferredHardwareIOBufferDuration,
+                                size,
+                                &duration);
+        
+        //変更後の値を確認してみる
+        Float32 newDuration;
+        size = sizeof(Float32);
+        AudioSessionGetProperty(kAudioSessionProperty_CurrentHardwareIOBufferDuration,
+                                &size,
+                                &newDuration);
+        printf("newDuration = %f\n",newDuration);
+        NSLog(@"frame size = %f", sineWaveDef.sampleRate * newDuration);
+    }
 }
 
 -(void)play{

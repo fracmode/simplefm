@@ -104,6 +104,13 @@ void systemSoundCompletionProcFunction( SystemSoundID ssID, void* clientData ) {
     textBPM.text = [NSString stringWithFormat:@"%.3f",sender.value];
 }
 
+//ノートナンバー(音程)から周波数を計算
+-(IBAction)frequencyAction:(UISlider*)sender{
+    float note = sender.value;
+    float frequency = pow( 2, ( note - 69 ) / 12 ) * 440;
+    remoteOutput.frequency = frequency;
+}
+
 - (void)dealloc {
 	// To adhere to memory management rules, release the instance variables.
     // 'textField' and 'label' are objects in the nib file and are created when the nib
