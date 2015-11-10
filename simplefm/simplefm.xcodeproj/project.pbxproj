@@ -11,9 +11,9 @@
 		1A879BFF1BF0D9F60060BCE0 /* simplefmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A879BFE1BF0D9F60060BCE0 /* simplefmTests.swift */; };
 		1A879C0A1BF0D9F60060BCE0 /* simplefmUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A879C091BF0D9F60060BCE0 /* simplefmUITests.swift */; };
 		1A879C1C1BF0DA8D0060BCE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A879C1B1BF0DA8D0060BCE0 /* AppDelegate.swift */; };
-		1A879C221BF0DB3D0060BCE0 /* AppWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A879C201BF0DB3D0060BCE0 /* AppWindow.xib */; };
-		1A879C251BF0DB960060BCE0 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A879C231BF0DB960060BCE0 /* MainView.xib */; };
 		1A879C271BF0DCDC0060BCE0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A879C261BF0DCDC0060BCE0 /* MainViewController.swift */; };
+		1A879C2D1BF240F30060BCE0 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A879C2B1BF240F30060BCE0 /* MainView.xib */; };
+		1A879C311BF241490060BCE0 /* RemoteOutputLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A879C301BF241490060BCE0 /* RemoteOutputLibrary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,9 +44,9 @@
 		1A879C091BF0D9F60060BCE0 /* simplefmUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = simplefmUITests.swift; sourceTree = "<group>"; };
 		1A879C0B1BF0D9F60060BCE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A879C1B1BF0DA8D0060BCE0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Classes/Delegate/AppDelegate.swift; sourceTree = "<group>"; };
-		1A879C211BF0DB3D0060BCE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Classes/View/Base.lproj/AppWindow.xib; sourceTree = "<group>"; };
-		1A879C241BF0DB960060BCE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Classes/View/Base.lproj/MainView.xib; sourceTree = "<group>"; };
 		1A879C261BF0DCDC0060BCE0 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Classes/Controller/MainViewController.swift; sourceTree = "<group>"; };
+		1A879C2C1BF240F30060BCE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Classes/View/Base.lproj/MainView.xib; sourceTree = "<group>"; };
+		1A879C301BF241490060BCE0 /* RemoteOutputLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoteOutputLibrary.swift; path = Classes/Library/RemoteOutputLibrary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +125,7 @@
 		1A879C171BF0DA660060BCE0 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1A879C2A1BF240C60060BCE0 /* Library */,
 				1A879C1A1BF0DA7E0060BCE0 /* View */,
 				1A879C191BF0DA750060BCE0 /* Delegate */,
 				1A879C181BF0DA6F0060BCE0 /* Controller */,
@@ -159,10 +160,17 @@
 		1A879C1F1BF0DAF30060BCE0 /* Base.lproj */ = {
 			isa = PBXGroup;
 			children = (
-				1A879C231BF0DB960060BCE0 /* MainView.xib */,
-				1A879C201BF0DB3D0060BCE0 /* AppWindow.xib */,
+				1A879C2B1BF240F30060BCE0 /* MainView.xib */,
 			);
 			name = Base.lproj;
+			sourceTree = "<group>";
+		};
+		1A879C2A1BF240C60060BCE0 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				1A879C301BF241490060BCE0 /* RemoteOutputLibrary.swift */,
+			);
+			name = Library;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,9 +277,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A879C251BF0DB960060BCE0 /* MainView.xib in Resources */,
+				1A879C2D1BF240F30060BCE0 /* MainView.xib in Resources */,
 				1A879BF11BF0D9F60060BCE0 /* Assets.xcassets in Resources */,
-				1A879C221BF0DB3D0060BCE0 /* AppWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +305,7 @@
 			files = (
 				1A879C1C1BF0DA8D0060BCE0 /* AppDelegate.swift in Sources */,
 				1A879C271BF0DCDC0060BCE0 /* MainViewController.swift in Sources */,
+				1A879C311BF241490060BCE0 /* RemoteOutputLibrary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,18 +341,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		1A879C201BF0DB3D0060BCE0 /* AppWindow.xib */ = {
+		1A879C2B1BF240F30060BCE0 /* MainView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				1A879C211BF0DB3D0060BCE0 /* Base */,
-			);
-			name = AppWindow.xib;
-			sourceTree = "<group>";
-		};
-		1A879C231BF0DB960060BCE0 /* MainView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1A879C241BF0DB960060BCE0 /* Base */,
+				1A879C2C1BF240F30060BCE0 /* Base */,
 			);
 			name = MainView.xib;
 			sourceTree = "<group>";
