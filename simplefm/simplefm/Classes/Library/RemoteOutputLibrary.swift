@@ -10,26 +10,30 @@ import AudioUnit
 import AudioToolbox
 
 
+//
+// func RenderCallback()
+//
 func RenderCallback (
-    inRefCon: UnsafeMutablePointer<Void>,
-    ioActionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>,
-    inTimeStamp: UnsafePointer<AudioTimeStamp>,
+    inRefCon: UnsafeMutablePointer <Void>,
+    ioActionFlags: UnsafeMutablePointer <AudioUnitRenderActionFlags>,
+    inTimeStamp: UnsafePointer <AudioTimeStamp>,
     inBusNumber: UInt32,
     inNumberFrames: UInt32,
-    ioData: UnsafeMutablePointer<AudioBufferList> ) -> (OSStatus)
+    ioData: UnsafeMutablePointer <AudioBufferList> ) -> (OSStatus)
 {
     let tmp: UnsafeMutablePointer<SoundPlayerData> = UnsafeMutablePointer<SoundPlayerData>(inRefCon)
     let data: SoundPlayerData = tmp.memory
     let buf: AudioBufferList = ioData.memory
     var datas: UnsafeMutablePointer<Float> = UnsafeMutablePointer<Float>(buf.mBuffers.mData)
-    
+
     let sineWaveFreq: Float = 440.0
     let samplingRate: Float = 44100.0
     let freq: Float = sineWaveFreq * 2.0 * Float(M_PI) / samplingRate
     
     for ( var i: UInt32 = 0; i < inNumberFrames; i++ ) {
-        var tmpVal: Float = sin(data.time)
-        memcpy(datas, &tmpVal, sizeof(Float))
+        let wave: Float = sin(data.time)
+        var sample : Float = wave * Float( 1 << kAudioUnitSampleFractionBits )
+        memcpy(datas, &sample, sizeof(Float))
         datas++
         data.time += freq
     }
@@ -37,11 +41,21 @@ func RenderCallback (
     return noErr
 }
 
+//
+// class SoundPlayerData
+//
 class SoundPlayerData
 {
-    var time: Float = 0.0;
+    var time: Float = 0.0
+    var phase : Double = 0.0
+    var sampleRate : Float64 = 0.0
+    var frequency : Double = 0.0
+    var freqz : Double = 0.0
 }
 
+//
+// class RemoteOutputLibrary
+//
 class RemoteOutputLibrary: NSObject {
     var audioUnit : AudioUnit = AudioUnit()
     var audioComponentDescription : AudioComponentDescription = AudioComponentDescription()
