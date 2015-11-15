@@ -8,7 +8,7 @@
 
 import AudioUnit
 import AudioToolbox
-
+import AVFoundation
 
 //
 // func RenderCallback()
@@ -98,7 +98,51 @@ class RemoteOutputLibrary: NSObject {
 
         // AudioUnitとコールバックメソッドの関連づけ
         AudioUnitSetProperty( audioUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input,
-            0, &callbackStruct, UInt32( sizeofValue( callbackStruct ) ) );
+            0, &callbackStruct, UInt32( sizeofValue( callbackStruct ) ) )
+
+        
+        // StreamFormat の設定
+        soundPlayerData.sampleRate = 44100.0
+        soundPlayerData.phase = 0.0
+        soundPlayerData.freqz = soundPlayerData.freqz
+        
+        var audioFormat = AudioStreamBasicDescription()
+        audioFormat.mSampleRate         = soundPlayerData.sampleRate
+        audioFormat.mFormatID           = kAudioFormatLinearPCM
+        audioFormat.mFormatFlags        = kAudioFormatFlagsAudioUnitCanonical
+        audioFormat.mChannelsPerFrame   = 2
+        audioFormat.mBytesPerPacket     = UInt32( sizeof(Int32) )
+        audioFormat.mBytesPerFrame      = UInt32( sizeof(Int32) )
+        audioFormat.mFramesPerPacket    = 1
+        audioFormat.mBitsPerChannel     = UInt32( 8 * sizeof(Int32) )
+        audioFormat.mReserved           = 0
+
+        AudioUnitSetProperty( audioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input,
+            0, &callbackStruct, UInt32( sizeofValue( callbackStruct ) ) )
+        
+        //フレームバッファサイズの変更
+        let audioSession = AVAudioSession.sharedInstance()
+        try! audioSession.setCategory( AVAudioSessionCategoryPlayback )
+        try! audioSession.setActive( true )
+        
+        let currentDuration : Double = audioSession.IOBufferDuration
+        print("currentDuration = %f\n",currentDuration);
+        //フレームバッファサイズ
+        NSLog("frame size = %f", soundPlayerData.sampleRate * currentDuration);
+        
+        //フレーム数から秒を計算 256 = 希望するフレーム数
+        let duration : Double = 256 / soundPlayerData.sampleRate;
+        print( "duration = %f\n", duration );
+
+        //IOBufferDurationを変更する
+        try! audioSession.setPreferredIOBufferDuration( NSTimeInterval( duration ) )
+        
+        //変更後の値を確認してみる
+        let newDuration : Double = audioSession.IOBufferDuration
+        print("newDuration = %f\n",newDuration);
+        //フレームバッファサイズ
+        NSLog("frame size = %f", soundPlayerData.sampleRate * newDuration);
+        
     }
     
     // play()
