@@ -26,16 +26,15 @@ func RenderCallback (
     let buf: AudioBufferList = ioData.memory
     var datas: UnsafeMutablePointer<Float> = UnsafeMutablePointer<Float>(buf.mBuffers.mData)
 
-    let sineWaveFreq: Float = 440.0
-    let samplingRate: Float = 44100.0
-    let freq: Float = sineWaveFreq * 2.0 * Float(M_PI) / samplingRate
+    let freq: Float = data.frequency
     
     for ( var i: UInt32 = 0; i < inNumberFrames; i++ ) {
-        let wave: Float = sin(data.time)
+        let wave: Float = sin(data.phase)
         var sample : Float = wave * Float( 1 << kAudioUnitSampleFractionBits )
         memcpy(datas, &sample, sizeof(Float))
         datas++
-        data.time += freq
+        data.phase += data.freqz
+        data.freqz = 0.001 * freq + 0.999 * data.freqz
     }
     
     return noErr
@@ -46,11 +45,10 @@ func RenderCallback (
 //
 class SoundPlayerData
 {
-    var time: Float = 0.0
-    var phase : Double = 0.0
-    var sampleRate : Float64 = 0.0
-    var frequency : Double = 0.0
-    var freqz : Double = 0.0
+    var phase : Float = 0.0
+    var sampleRate : Float = 0.0
+    var frequency : Float = 0.0
+    var freqz : Float = 0.0
 }
 
 //
@@ -104,12 +102,13 @@ class RemoteOutputLibrary: NSObject {
         // StreamFormat の設定
         soundPlayerData.sampleRate = 44100.0
         soundPlayerData.phase = 0.0
+        soundPlayerData.frequency = 440 * 2.0 * Float(M_PI) / soundPlayerData.sampleRate
         soundPlayerData.freqz = soundPlayerData.freqz
         
         var audioFormat = AudioStreamBasicDescription()
-        audioFormat.mSampleRate         = soundPlayerData.sampleRate
+        audioFormat.mSampleRate         = Float64( soundPlayerData.sampleRate )
         audioFormat.mFormatID           = kAudioFormatLinearPCM
-        audioFormat.mFormatFlags        = kAudioFormatFlagsAudioUnitCanonical
+        audioFormat.mFormatFlags        = kAudioFormatFlagIsFloat | kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked | kAudioFormatFlagIsNonInterleaved
         audioFormat.mChannelsPerFrame   = 2
         audioFormat.mBytesPerPacket     = UInt32( sizeof(Int32) )
         audioFormat.mBytesPerFrame      = UInt32( sizeof(Int32) )
@@ -118,7 +117,7 @@ class RemoteOutputLibrary: NSObject {
         audioFormat.mReserved           = 0
 
         AudioUnitSetProperty( audioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input,
-            0, &callbackStruct, UInt32( sizeofValue( callbackStruct ) ) )
+            0, &audioFormat, UInt32( sizeofValue( audioFormat ) ) )
         
         //フレームバッファサイズの変更
         let audioSession = AVAudioSession.sharedInstance()
@@ -128,10 +127,10 @@ class RemoteOutputLibrary: NSObject {
         let currentDuration : Double = audioSession.IOBufferDuration
         print("currentDuration = %f\n",currentDuration);
         //フレームバッファサイズ
-        NSLog("frame size = %f", soundPlayerData.sampleRate * currentDuration);
+        NSLog("frame size = %f", Double( soundPlayerData.sampleRate ) * currentDuration);
         
         //フレーム数から秒を計算 256 = 希望するフレーム数
-        let duration : Double = 256 / soundPlayerData.sampleRate;
+        let duration : Double = 256 / Double( soundPlayerData.sampleRate );
         print( "duration = %f\n", duration );
 
         //IOBufferDurationを変更する
@@ -141,7 +140,7 @@ class RemoteOutputLibrary: NSObject {
         let newDuration : Double = audioSession.IOBufferDuration
         print("newDuration = %f\n",newDuration);
         //フレームバッファサイズ
-        NSLog("frame size = %f", soundPlayerData.sampleRate * newDuration);
+        NSLog("frame size = %f", Double( soundPlayerData.sampleRate ) * newDuration);
         
     }
     
