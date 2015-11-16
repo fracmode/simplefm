@@ -76,6 +76,27 @@ class RemoteOutputLibrary: NSObject {
     
     // prepareAudioUnit()
     func prepareAudioUnit() {
+        // AudioUnitを初期化
+        _initAudioUnit()
+    
+        // AudioUnitとコールバックメソッドの関連づけ
+        _setAudioUnitPropertyCallbackStruct()
+        
+        // StreamFormat の設定
+        soundPlayerData.sampleRate = 44100.0
+        soundPlayerData.phase = 0.0
+        soundPlayerData.frequency = 440 * 2.0 * Float(M_PI) / soundPlayerData.sampleRate
+        soundPlayerData.freqz = soundPlayerData.freqz
+        
+        _setAudioUnitPropertyAudioFormat()
+        
+        //フレームバッファサイズの変更
+        _setAudioSession()
+        
+    }
+
+    // _initAudioUnit()
+    func _initAudioUnit() {
         //RemoteIO Audio UnitのAudioComponentDescriptionを作成
         audioComponentDescription.componentType = kAudioUnitType_Output
         audioComponentDescription.componentSubType = kAudioUnitSubType_RemoteIO
@@ -88,23 +109,20 @@ class RemoteOutputLibrary: NSObject {
         
         //AudioComponentとAudioUnitのアドレスを渡してAudioUnitを取得
         AudioComponentInstanceNew( audioComponent, &audioUnit )
-
+        
         //AudioUnitを初期化
         AudioUnitInitialize( audioUnit )
+    }
     
+    // _setAudioUnitPropertyCallbackStruct()
+    func _setAudioUnitPropertyCallbackStruct() {
         var callbackStruct = AURenderCallbackStruct(inputProc: RenderCallback, inputProcRefCon: &soundPlayerData )
-
-        // AudioUnitとコールバックメソッドの関連づけ
         AudioUnitSetProperty( audioUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input,
             0, &callbackStruct, UInt32( sizeofValue( callbackStruct ) ) )
-
-        
-        // StreamFormat の設定
-        soundPlayerData.sampleRate = 44100.0
-        soundPlayerData.phase = 0.0
-        soundPlayerData.frequency = 440 * 2.0 * Float(M_PI) / soundPlayerData.sampleRate
-        soundPlayerData.freqz = soundPlayerData.freqz
-        
+    }
+    
+    // _setAudioUnitPropertyAudioFormat()
+    func _setAudioUnitPropertyAudioFormat() {
         var audioFormat = AudioStreamBasicDescription()
         audioFormat.mSampleRate         = Float64( soundPlayerData.sampleRate )
         audioFormat.mFormatID           = kAudioFormatLinearPCM
@@ -115,10 +133,13 @@ class RemoteOutputLibrary: NSObject {
         audioFormat.mFramesPerPacket    = 1
         audioFormat.mBitsPerChannel     = UInt32( 8 * sizeof(Int32) )
         audioFormat.mReserved           = 0
-
+        
         AudioUnitSetProperty( audioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input,
             0, &audioFormat, UInt32( sizeofValue( audioFormat ) ) )
-        
+    }
+    
+    // _setAudioSession()
+    func _setAudioSession() {
         //フレームバッファサイズの変更
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setCategory( AVAudioSessionCategoryPlayback )
@@ -132,7 +153,7 @@ class RemoteOutputLibrary: NSObject {
         //フレーム数から秒を計算 256 = 希望するフレーム数
         let duration : Double = 256 / Double( soundPlayerData.sampleRate );
         print( "duration = %f\n", duration );
-
+        
         //IOBufferDurationを変更する
         try! audioSession.setPreferredIOBufferDuration( NSTimeInterval( duration ) )
         
@@ -141,7 +162,6 @@ class RemoteOutputLibrary: NSObject {
         print("newDuration = %f\n",newDuration);
         //フレームバッファサイズ
         NSLog("frame size = %f", Double( soundPlayerData.sampleRate ) * newDuration);
-        
     }
     
     // play()
