@@ -10,6 +10,15 @@
 		1A05AE171C019F8900FD5C9B /* AudioUnitLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05AE161C019F8900FD5C9B /* AudioUnitLibrary.swift */; };
 		1A05AE181C019F8900FD5C9B /* AudioUnitLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05AE161C019F8900FD5C9B /* AudioUnitLibrary.swift */; };
 		1A05AE191C019F8900FD5C9B /* AudioUnitLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05AE161C019F8900FD5C9B /* AudioUnitLibrary.swift */; };
+		1A7656D61C0201B900BED828 /* AudioComponentLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7656D51C0201B900BED828 /* AudioComponentLibrary.swift */; };
+		1A7656D71C0201B900BED828 /* AudioComponentLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7656D51C0201B900BED828 /* AudioComponentLibrary.swift */; };
+		1A7656D81C0201B900BED828 /* AudioComponentLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7656D51C0201B900BED828 /* AudioComponentLibrary.swift */; };
+		1A7656DA1C0206C000BED828 /* AUSynthSineToneLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7656D91C0206C000BED828 /* AUSynthSineToneLibrary.swift */; };
+		1A7656DB1C0206C000BED828 /* AUSynthSineToneLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7656D91C0206C000BED828 /* AUSynthSineToneLibrary.swift */; };
+		1A7656DC1C0206C000BED828 /* AUSynthSineToneLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7656D91C0206C000BED828 /* AUSynthSineToneLibrary.swift */; };
+		1A7656DE1C0213BE00BED828 /* AudioSessionLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7656DD1C0213BE00BED828 /* AudioSessionLibrary.swift */; };
+		1A7656DF1C0213BE00BED828 /* AudioSessionLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7656DD1C0213BE00BED828 /* AudioSessionLibrary.swift */; };
+		1A7656E01C0213BE00BED828 /* AudioSessionLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7656DD1C0213BE00BED828 /* AudioSessionLibrary.swift */; };
 		1A879BF11BF0D9F60060BCE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A879BF01BF0D9F60060BCE0 /* Assets.xcassets */; };
 		1A879BFF1BF0D9F60060BCE0 /* simplefmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A879BFE1BF0D9F60060BCE0 /* simplefmTests.swift */; };
 		1A879C0A1BF0D9F60060BCE0 /* simplefmUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A879C091BF0D9F60060BCE0 /* simplefmUITests.swift */; };
@@ -38,6 +47,9 @@
 
 /* Begin PBXFileReference section */
 		1A05AE161C019F8900FD5C9B /* AudioUnitLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioUnitLibrary.swift; path = Classes/Library/AudioUnitLibrary.swift; sourceTree = "<group>"; };
+		1A7656D51C0201B900BED828 /* AudioComponentLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioComponentLibrary.swift; path = Classes/Library/AudioComponentLibrary.swift; sourceTree = "<group>"; };
+		1A7656D91C0206C000BED828 /* AUSynthSineToneLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AUSynthSineToneLibrary.swift; path = Classes/Library/AUSynthSineToneLibrary.swift; sourceTree = "<group>"; };
+		1A7656DD1C0213BE00BED828 /* AudioSessionLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioSessionLibrary.swift; path = Classes/Library/AudioSessionLibrary.swift; sourceTree = "<group>"; };
 		1A879BE61BF0D9F60060BCE0 /* simplefm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simplefm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A879BF01BF0D9F60060BCE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A879BF51BF0D9F60060BCE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -174,6 +186,9 @@
 			children = (
 				1A879C301BF241490060BCE0 /* RemoteOutputLibrary.swift */,
 				1A05AE161C019F8900FD5C9B /* AudioUnitLibrary.swift */,
+				1A7656D51C0201B900BED828 /* AudioComponentLibrary.swift */,
+				1A7656D91C0206C000BED828 /* AUSynthSineToneLibrary.swift */,
+				1A7656DD1C0213BE00BED828 /* AudioSessionLibrary.swift */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -309,7 +324,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A05AE171C019F8900FD5C9B /* AudioUnitLibrary.swift in Sources */,
+				1A7656D61C0201B900BED828 /* AudioComponentLibrary.swift in Sources */,
+				1A7656DE1C0213BE00BED828 /* AudioSessionLibrary.swift in Sources */,
 				1A879C1C1BF0DA8D0060BCE0 /* AppDelegate.swift in Sources */,
+				1A7656DA1C0206C000BED828 /* AUSynthSineToneLibrary.swift in Sources */,
 				1A879C271BF0DCDC0060BCE0 /* MainViewController.swift in Sources */,
 				1A879C311BF241490060BCE0 /* RemoteOutputLibrary.swift in Sources */,
 			);
@@ -319,8 +337,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A7656D71C0201B900BED828 /* AudioComponentLibrary.swift in Sources */,
+				1A7656DB1C0206C000BED828 /* AUSynthSineToneLibrary.swift in Sources */,
 				1A05AE181C019F8900FD5C9B /* AudioUnitLibrary.swift in Sources */,
 				1A879BFF1BF0D9F60060BCE0 /* simplefmTests.swift in Sources */,
+				1A7656DF1C0213BE00BED828 /* AudioSessionLibrary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,8 +349,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A7656D81C0201B900BED828 /* AudioComponentLibrary.swift in Sources */,
+				1A7656DC1C0206C000BED828 /* AUSynthSineToneLibrary.swift in Sources */,
 				1A05AE191C019F8900FD5C9B /* AudioUnitLibrary.swift in Sources */,
 				1A879C0A1BF0D9F60060BCE0 /* simplefmUITests.swift in Sources */,
+				1A7656E01C0213BE00BED828 /* AudioSessionLibrary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
