@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A05AE171C019F8900FD5C9B /* AudioUnitLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05AE161C019F8900FD5C9B /* AudioUnitLibrary.swift */; };
+		1A05AE181C019F8900FD5C9B /* AudioUnitLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05AE161C019F8900FD5C9B /* AudioUnitLibrary.swift */; };
+		1A05AE191C019F8900FD5C9B /* AudioUnitLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A05AE161C019F8900FD5C9B /* AudioUnitLibrary.swift */; };
 		1A879BF11BF0D9F60060BCE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A879BF01BF0D9F60060BCE0 /* Assets.xcassets */; };
 		1A879BFF1BF0D9F60060BCE0 /* simplefmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A879BFE1BF0D9F60060BCE0 /* simplefmTests.swift */; };
 		1A879C0A1BF0D9F60060BCE0 /* simplefmUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A879C091BF0D9F60060BCE0 /* simplefmUITests.swift */; };
@@ -34,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A05AE161C019F8900FD5C9B /* AudioUnitLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioUnitLibrary.swift; path = Classes/Library/AudioUnitLibrary.swift; sourceTree = "<group>"; };
 		1A879BE61BF0D9F60060BCE0 /* simplefm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simplefm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A879BF01BF0D9F60060BCE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A879BF51BF0D9F60060BCE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -169,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				1A879C301BF241490060BCE0 /* RemoteOutputLibrary.swift */,
+				1A05AE161C019F8900FD5C9B /* AudioUnitLibrary.swift */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -303,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A05AE171C019F8900FD5C9B /* AudioUnitLibrary.swift in Sources */,
 				1A879C1C1BF0DA8D0060BCE0 /* AppDelegate.swift in Sources */,
 				1A879C271BF0DCDC0060BCE0 /* MainViewController.swift in Sources */,
 				1A879C311BF241490060BCE0 /* RemoteOutputLibrary.swift in Sources */,
@@ -313,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A05AE181C019F8900FD5C9B /* AudioUnitLibrary.swift in Sources */,
 				1A879BFF1BF0D9F60060BCE0 /* simplefmTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A05AE191C019F8900FD5C9B /* AudioUnitLibrary.swift in Sources */,
 				1A879C0A1BF0D9F60060BCE0 /* simplefmUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -531,6 +539,7 @@
 				1A879C101BF0D9F60060BCE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1A879C111BF0D9F60060BCE0 /* Build configuration list for PBXNativeTarget "simplefmTests" */ = {
 			isa = XCConfigurationList;
@@ -539,6 +548,7 @@
 				1A879C131BF0D9F60060BCE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1A879C141BF0D9F60060BCE0 /* Build configuration list for PBXNativeTarget "simplefmUITests" */ = {
 			isa = XCConfigurationList;
@@ -547,6 +557,7 @@
 				1A879C161BF0D9F60060BCE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
