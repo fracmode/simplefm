@@ -11,11 +11,12 @@ import AudioToolbox
 import AVFoundation
 
 func GetWaveSaw( phase : Float ) -> Float {
-    var wave : Float = 0.0
-    for i in 1...16 {
-        wave += sin( phase * Float( i ) ) / Float( i )
+    var wave = phase / 4
+    if ( wave > 2 ) {
+        wave = wave % 2
     }
-    return wave
+    let ret = 1 - wave
+    return ret
 }
 
 //
@@ -43,19 +44,23 @@ func RenderCallback (
     
     let freq: Float = data.frequency
     // var freq : Float = data.hertz * 2.0 * Float(M_PI) / data.sampleRate
-    let volume: Float = 0.25
+    let amp: Float = 0.33
     
     for ( var i: UInt32 = 0; i < inNumberFrames; i++ ) {
-        let wave: Float = sin(data.phase)
-        // let wave: Float = GetWaveSaw( data.phase )
-        var sample : Float = wave * volume * Float( 1 << kAudioUnitSampleFractionBits )
-        memcpy( outputs[0], &sample, sizeof(Float) )
-        outputs[0]++
-        memcpy( outputs[1], &sample, sizeof(Float) )
-        outputs[1]++
+        // let wave: Float = sin(data.phase)
+        let wave: Float = GetWaveSaw( data.phase )
+        var sample : Float = wave * amp
+        // NSLog( "%f", sample )
+        memcpy( outputs[0]++, &sample, sizeof(Float) )
+        memcpy( outputs[1]++, &sample, sizeof(Float) )
+        let phaseCycle : Float = data.hertz * 2.0 * Float(M_PI)
+        // let freq: Float = phaseCycle / Float( data.sampleRate )
         data.phase += data.freqz
+        if ( data.phase >= phaseCycle ) {
+            data.phase -= phaseCycle
+        }
         // freq = ( data.hertz * 2 ) * 2.0 * Float(M_PI) / data.sampleRate
-        data.freqz = 0.001 * freq + 0.999 * data.freqz
+        data.freqz = 0.005 * freq + 0.995 * data.freqz
     }
     
     return noErr
@@ -69,7 +74,7 @@ class RemoteOutputLibrary: AudioUnitLibrary {
     // init
     override init() {
         super.init()
-        setAudioUnitPropertyCallbackStruct( RenderCallback )
+        super.setAudioUnitPropertyCallbackStruct( RenderCallback )
     }
    
 }

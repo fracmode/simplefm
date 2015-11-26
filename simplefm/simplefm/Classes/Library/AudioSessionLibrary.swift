@@ -16,6 +16,11 @@ class AudioSessionLibrary : NSObject {
         self.asInstance = AVAudioSession.sharedInstance()
     }
     
+    // getInstance()
+    func getInstance() -> AVAudioSession {
+        return self.asInstance
+    }
+    
     // setActive()
     func setActive() {
         try! self.asInstance.setActive( true )
