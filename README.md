@@ -9,4 +9,4 @@ TODO:
 - synthesize sine/triangle/sawtooth/square waveform
   - use wavetable
 - add Spectrum Analyzer
-- add FFT Filter
+  - use FFT
