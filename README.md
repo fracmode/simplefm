@@ -8,5 +8,6 @@ Simple FM Application
 TODO:
 - synthesize sine/triangle/sawtooth/square waveform
   - use wavetable
+  - add frequency moduration
 - add Spectrum Analyzer
   - use FFT
