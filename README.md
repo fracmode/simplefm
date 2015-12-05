@@ -1,7 +1,7 @@
 # simplefm
 Simple FM Application
 
-- iOS6 Compatible
+- iOS7 Compatible
 - Lightweight Sound Engine for FM Sound
 - Use AudioUnit for engine
 
