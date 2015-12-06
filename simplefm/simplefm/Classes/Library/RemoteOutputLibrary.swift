@@ -10,7 +10,10 @@ import AudioUnit
 import AudioToolbox
 import AVFoundation
 
-func GetWaveSaw( phase : Float ) -> Float {
+//
+// func __RemoteOutputLibrary__GetWaveSaw()
+//
+func __RemoteOutputLibrary__GetWaveSaw( phase : Float ) -> Float {
     var wave = phase / 4
     if ( wave > 2 ) {
         wave = wave % 2
@@ -20,9 +23,9 @@ func GetWaveSaw( phase : Float ) -> Float {
 }
 
 //
-// func RenderCallback()
+// func __RemoteOutputLibrary__RenderCallback()
 //
-func RenderCallback (
+func __RemoteOutputLibrary__RenderCallback (
     inRefCon: UnsafeMutablePointer <Void>,
     ioActionFlags: UnsafeMutablePointer <AudioUnitRenderActionFlags>,
     inTimeStamp: UnsafePointer <AudioTimeStamp>,
@@ -48,7 +51,7 @@ func RenderCallback (
     
     for ( var i: UInt32 = 0; i < inNumberFrames; i++ ) {
         // let wave: Float = sin(data.phase)
-        let wave: Float = GetWaveSaw( data.phase )
+        let wave: Float = __RemoteOutputLibrary__GetWaveSaw( data.phase )
         var sample : Float = wave * amp
         // NSLog( "%f", sample )
         memcpy( outputs[0]++, &sample, sizeof(Float) )
@@ -70,11 +73,9 @@ func RenderCallback (
 // class RemoteOutputLibrary
 //
 class RemoteOutputLibrary: AudioUnitLibrary {
-    
     // init
     override init() {
         super.init()
-        super.setAudioUnitPropertyCallbackStruct( RenderCallback )
+        super.setAudioUnitPropertyCallbackStruct( __RemoteOutputLibrary__RenderCallback )
     }
-   
 }
