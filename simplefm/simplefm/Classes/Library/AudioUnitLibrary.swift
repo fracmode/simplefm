@@ -11,20 +11,7 @@ import AudioToolbox
 import AVFoundation
 
 //
-// class SoundPlayerData
-//
-class SoundPlayerData
-{
-    var phase : Float = 0.0
-    var phaseCycle : Float = 0.0
-    var sampleRate : Float64 = 0.0
-    var frequency : Float = 0.0
-    var freqz : Float = 0.0
-    var hertz : Float = 0.0
-}
-
-//
-// class SoundPlayerData
+// class AudioUnitLibrary
 //
 
 class AudioUnitLibrary: NSObject {
@@ -32,9 +19,15 @@ class AudioUnitLibrary: NSObject {
     var asLib : AudioSessionLibrary = AudioSessionLibrary()
     var auInstance : AudioUnit = AudioUnit()
     var audioComponent : AudioComponent = nil
-    var soundPlayerData: SoundPlayerData = SoundPlayerData()
     var isPlaying : Bool = false
 
+    var phase : Float = 0.0
+    var phaseCycle : Float = 0.0
+    var sampleRate : Float64 = 0.0
+    var frequency : Float = 0.0
+    var freqz : Float = 0.0
+    var hertz : Float = 0.0
+    
     // init
     override init() {
         super.init()
@@ -57,12 +50,12 @@ class AudioUnitLibrary: NSObject {
         // setAudioUnitPropertyCallbackStruct()
         
         // StreamFormat の設定
-        soundPlayerData.sampleRate = 44100.0
-        soundPlayerData.phase = 0.0
-        soundPlayerData.hertz = 440.0
-        soundPlayerData.phaseCycle = soundPlayerData.hertz * 2.0 * Float(M_PI)
-        soundPlayerData.frequency = soundPlayerData.phaseCycle / Float( soundPlayerData.sampleRate )
-        soundPlayerData.freqz = soundPlayerData.freqz
+        self.sampleRate = 44100.0
+        self.phase = 0.0
+        self.hertz = 440.0
+        self.phaseCycle = self.hertz * 2.0 * Float(M_PI)
+        self.frequency = self.phaseCycle / Float( self.sampleRate )
+        self.freqz = 0
         
         self._setAudioUnitPropertyAudioFormat()
         
@@ -98,7 +91,8 @@ class AudioUnitLibrary: NSObject {
     
     // setAudioUnitPropertyCallbackStruct()
     func setAudioUnitPropertyCallbackStruct( auCallback: AURenderCallback? ) {
-        var callbackStruct = AURenderCallbackStruct(inputProc: auCallback!, inputProcRefCon: &soundPlayerData )
+        let ref: UnsafeMutablePointer<Void> = unsafeBitCast(self, UnsafeMutablePointer<Void>.self)
+        var callbackStruct = AURenderCallbackStruct(inputProc: auCallback!, inputProcRefCon: ref )
         AudioUnitSetProperty( auInstance, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input,
             0, &callbackStruct, UInt32( sizeofValue( callbackStruct ) ) )
     }
@@ -114,7 +108,7 @@ class AudioUnitLibrary: NSObject {
     // _setAudioSession()
     func _setAudioSession() {
         asLib.setCategoryPlayback()
-        asLib.setPreferredIOBufferDuration( 256 / Double( soundPlayerData.sampleRate ) )
+        asLib.setPreferredIOBufferDuration( 256 / Double( self.sampleRate ) )
         asLib.setPreferredOutputNumberOfChannels( 2 )
         asLib.setActive()
         
